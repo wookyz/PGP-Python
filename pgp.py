@@ -33,7 +33,7 @@ class PGP:
         Gera um número primo aleatório.
         """
         while True:
-            num = random.randint(10, 1000)
+            num = random.randint(100, 1000)
             if num % 2 == 0:
                 num += 1
             if self.__ehPrimo__(num):
@@ -95,7 +95,8 @@ class PGP:
         """
         Descriptografa a mensagem.
         """
-        return "".join([chr(self.descriptografarCaractere(char)) for char in mensagemCriptografada])
+        return "".join([chr(self.descriptografarCaractere(char))
+                        for char in mensagemCriptografada])
 
     def descriptografarCaractere(self, char: int) -> int:
         """
@@ -107,14 +108,15 @@ class PGP:
         """
         Representação da classe.
         """
-        return f"\nChave pública: ({self.e}, {self.n})\nChave privada: ({self.d}, {self.n})"
+        return f"\nChave pública: ({self.e}, {self.n})\
+                \nChave privada: ({self.d}, {self.n})"
 
     def exibirDados(self) -> None:
         """
         Exibe os dados da chave.
         """
-        print(
-            f"P: {self.p}\nQ: {self.q}\nN: {self.n}\nTotiente: {self.totiente}\nE: {self.e}\nD: {self.d}")
+        print(f"P: {self.p}\nQ: {self.q}\nN: {self.n}\
+            \nTotiente: {self.totiente}\nE: {self.e}\nD: {self.d}")
         print(f"Mensagem criptografada: {self.mensagemCriptografada}")
 
 
