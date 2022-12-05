@@ -12,8 +12,9 @@ class PGP:
         """
         Gera as chaves pública e privada.
         """
-        p = self.__gerarPrimo__()
-        q = self.__gerarPrimo__()
+        lista = self.__gerarListaPrimos__()
+        p = self.__gerarPrimo__(lista)
+        q = self.__gerarPrimo__(lista)
         self.p = p
         self.q = q
 
@@ -28,29 +29,30 @@ class PGP:
         self.e = e
         self.d = d
 
-    def __gerarPrimo__(self) -> int:
+    def __gerarPrimo__(self,lista) -> int:
         """
         Gera um número primo aleatório.
         """
-        while True:
-            num = random.randint(10, 1000)
-            if num % 2 == 0:
-                num += 1
-            if self.__ehPrimo__(num):
-                return num
-
-    def __ehPrimo__(self, n: int) -> bool:
+        return random.choice(lista)
+    def __gerarListaPrimos__(self) -> list:
+        lista = [2,3,5]
+        n = 7
+        while(True):    
+            if self.__ehPrimo__(lista, n):
+                lista.append(n)
+            n+=2
+            if n >= 2000:
+                break
+        return lista
+    def __ehPrimo__(self, lista , n):
         """
         Checa se um número é primo ou não.
         """
-        if n == 1:
-            return False
-
-        i = 2
-        while i*i <= n:
-            if n % i == 0:
+        for elemento in lista:
+            if n % elemento == 0:
                 return False
-            i += 1
+            if elemento >= math.sqrt(n):
+                break
         return True
 
     def __calculaTotiente__(self, p: int, q: int) -> int:
